@@ -1,0 +1,19 @@
+<?php
+
+function france_validate_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'node_myPage_form') { 
+    $form['#validate']['field_france'] = 'location_form_validate';
+      }
+}
+
+function location_form_validate($form, &$form_state) {
+  
+  $location_input = $form_state->getValue(['field_france', 0, 'value']);
+  $location_letters = str_split(strtolower($location_input));
+  $accepted = ['f', 'r', 'a', 'n', 'c', 'e'];
+
+  foreach($location_letters as $input)
+    if (!in_array($input, $accepted)) {
+      $form_state->setErrorByName('field_france', t('It does not look like you entered france, or letters that make up france. Please keep it to france.'));
+    }
+}

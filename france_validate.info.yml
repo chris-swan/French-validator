@@ -1,0 +1,5 @@
+name: France Validate
+description: Validates it is france
+package: Frenchy validator
+type: module
+core: 8.x
